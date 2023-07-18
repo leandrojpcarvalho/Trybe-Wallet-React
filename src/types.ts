@@ -1,4 +1,7 @@
 export type UserType = {
   email:string;
-  password: string;
+};
+
+export type RootType = {
+  user: UserType;
 };
