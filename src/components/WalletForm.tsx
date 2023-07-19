@@ -31,6 +31,7 @@ function WalletForm() {
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(requestCurrencies());
+    test();
   };
 
   const test = () => {
@@ -46,11 +47,11 @@ function WalletForm() {
     dispatch(setNewExpense(temp));
     setForm(INITIAL_STATE);
   };
-  useEffect(() => {
-    if (Number(value) > 0) {
-      test();
-    }
-  }, [cache]);
+  // useEffect(() => {
+  //   if (Number(value) > 0) {
+  //     test();
+  //   }
+  // }, [cache]);
 
   return (
     <div>
