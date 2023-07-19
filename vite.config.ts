@@ -14,7 +14,13 @@ export default defineConfig({
     coverage: {
       reporter: ['text', 'json', 'html'],
       include: ['src/**/*'],
-      exclude: [],
+      exclude: [
+        "node_modules/*",
+        "src/main.ts",
+        "src/redux/index.ts",
+        "src/tests/*",
+        "src/tests/helpers/*"
+      ],
       provider: 'c8'
     }
   },
