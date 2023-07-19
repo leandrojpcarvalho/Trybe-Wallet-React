@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../redux/actions';
+import { handleOnChange } from '../utils';
 
 const INITIAL_STATE = {
   email: '',
@@ -14,17 +15,6 @@ function Login() {
   const dispatch = useDispatch();
 
   const { email, password } = form;
-
-  const handleOnChange = (
-    event: React.ChangeEvent<
-    HTMLSelectElement | HTMLTextAreaElement | HTMLInputElement
-    >,
-  ) => {
-    const inputValue = event.target.value as string;
-    const inputName = event.target.name;
-    const temp = { ...form, [inputName]: inputValue };
-    setForm(temp);
-  };
 
   const isEnable = () => {
     const regexTestEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -45,7 +35,7 @@ function Login() {
         data-testid="email-input"
         placeholder="Email"
         value={ email }
-        onChange={ handleOnChange }
+        onChange={ (event) => handleOnChange(event, setForm, form) }
       />
       <input
         name="password"
@@ -53,7 +43,7 @@ function Login() {
         data-testid="password-input"
         placeholder="Password"
         value={ password }
-        onChange={ handleOnChange }
+        onChange={ (event) => handleOnChange(event, setForm, form) }
       />
       <button
         type="submit"
