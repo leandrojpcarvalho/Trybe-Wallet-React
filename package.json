@@ -66,14 +66,5 @@
     "typescript": "^5.0.4",
     "vite": "^4.1.1",
     "vitest": "^0.30.1"
-  },
-  "jest": {
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/src/index.js",
-      "/src/serviceWorker.js",
-      "/redux/store",
-      "/src/tests/"
-    ]
   }
 }
