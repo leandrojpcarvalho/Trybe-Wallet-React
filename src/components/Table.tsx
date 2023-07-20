@@ -6,16 +6,16 @@ function Table() {
   const tableBody = expenses.map((expense) => {
     const { id, description, tag, method, exchangeRates, currency, value } = expense;
     const { ask, name } = exchangeRates[currency];
-
+    const variavelTrybe = Number(value);
     return (
       <tr key={ id }>
         <td>{description}</td>
         <td>{tag}</td>
         <td>{method}</td>
-        <td>{value.toFixed(2)}</td>
+        <td>{variavelTrybe.toFixed(2)}</td>
         <td>{name}</td>
         <td>{Number(ask).toFixed(2)}</td>
-        <td>{(value * Number(ask)).toFixed(2)}</td>
+        <td>{(variavelTrybe * Number(ask)).toFixed(2)}</td>
         <td>Real</td>
         <td>
           <button type="button">Editar</button>

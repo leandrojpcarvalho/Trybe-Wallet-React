@@ -13,7 +13,7 @@ function Header() {
   useEffect(() => {
     const temp = expenses.reduce((acc, currentExpense) => {
       console.log(cache[currentExpense.currency]);
-      acc += currentExpense.value * Number(cache[currentExpense.currency].ask);
+      acc += Number(currentExpense.value) * Number(cache[currentExpense.currency].ask);
       return acc;
     }, 0);
     setTotal(temp);

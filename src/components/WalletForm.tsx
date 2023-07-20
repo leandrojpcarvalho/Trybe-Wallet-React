@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { requestCurrencies, setNewExpense } from '../redux/actions';
-import { APIResponse, Dispatch, Expenses, GlobalStateType } from '../types';
+import { APIResponse, Dispatch, GlobalStateType } from '../types';
 import { handleOnChange } from '../utils';
 
 const INITIAL_STATE = {
@@ -37,7 +37,7 @@ function WalletForm() {
   const test = () => {
     const temp = {
       id: expenses.length,
-      value: Number(value),
+      value,
       description,
       currency,
       method,

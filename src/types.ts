@@ -24,12 +24,12 @@ export type WalletType = {
 };
 
 export type Expenses = {
-  id: number,
-  value: number,
+  id: number;
+  value: string;
   description: string;
   currency: string;
   method: string;
-  tag: string,
+  tag: string;
   exchangeRates: APIResponse,
 };
 
