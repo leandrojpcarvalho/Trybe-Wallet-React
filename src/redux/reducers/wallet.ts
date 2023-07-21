@@ -10,17 +10,23 @@ const INITIAL_STATE = {
 };
 
 const walletData = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case Actions.SET_WALLET_DATA:
       return {
         ...state,
-        currencies: action.payload.currencies,
-        cache: action.payload.param,
+        currencies: payload.currencies,
+        cache: payload.param,
       };
     case Actions.SET_WALLET_EXPENSES:
       return {
         ...state,
-        expenses: [...state.expenses, action.payload],
+        expenses: [...state.expenses, payload],
+      };
+    case Actions.DELETE_WALLET_EXPENSES:
+      return {
+        ...state,
+        expenses: state.expenses.filter((expense) => expense.id !== payload),
       };
     default: return state;
   }

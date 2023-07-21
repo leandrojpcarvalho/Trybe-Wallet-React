@@ -4,6 +4,7 @@ export enum Actions {
   SET_USER_DATA = 'SET_USER_DATA',
   SET_WALLET_DATA = 'SET_WALLET_DATA',
   SET_WALLET_EXPENSES = 'SET_WALLET_EXPENSES',
+  DELETE_WALLET_EXPENSES = 'DELETE_WALLET_EXPENSES',
 }
 
 export type SetUserType = {
@@ -49,5 +50,12 @@ export const setNewExpense = (param: Expenses) => {
     payload: {
       ...param,
     },
+  };
+};
+
+export const deleteExpense = (param: number) => {
+  return {
+    type: Actions.DELETE_WALLET_EXPENSES,
+    payload: param,
   };
 };

@@ -1,8 +1,10 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootType } from '../types';
+import { deleteExpense } from '../redux/actions';
 
 function Table() {
   const { expenses } = useSelector((state: RootType) => ({ ...state.wallet }));
+  const dispatch = useDispatch();
   const tableBody = expenses.map((expense) => {
     const { id, description, tag, method, exchangeRates, currency, value } = expense;
     const { ask, name } = exchangeRates[currency];
@@ -19,7 +21,13 @@ function Table() {
         <td>Real</td>
         <td>
           <button type="button">Editar</button>
-          <button type="button">Excluir</button>
+          <button
+            type="button"
+            data-testid="delete-btn"
+            onClick={ () => dispatch(deleteExpense(id)) }
+          >
+            Excluir
+          </button>
         </td>
       </tr>
     );
