@@ -1,9 +1,9 @@
 import { Actions } from '../actions';
-import { Expenses } from '../../types';
+import { Expense } from '../../types';
 
 const INITIAL_STATE = {
   currencies: [] as string[],
-  expenses: [] as Expenses[],
+  expenses: [] as Expense[],
   editor: false,
   idToEdit: 0,
   cache: {},
@@ -27,6 +27,12 @@ const walletData = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         expenses: state.expenses.filter((expense) => expense.id !== payload),
+      };
+    case Actions.EDIT_WALLET_EXPENSES:
+      state.expenses[payload.id] = payload;
+      return {
+        ...state,
+        expenses: [...state.expenses],
       };
     default: return state;
   }

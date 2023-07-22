@@ -1,14 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootType } from '../types';
+import { useContext } from 'react';
+import { Expense, RootType } from '../types';
 import { deleteExpense } from '../redux/actions';
+import { Test } from '../context/test';
 
 function Table() {
   const { expenses } = useSelector((state: RootType) => ({ ...state.wallet }));
   const dispatch = useDispatch();
+  const { setForm, setIsEditing } = useContext(Test);
+
   const tableBody = expenses.map((expense) => {
     const { id, description, tag, method, exchangeRates, currency, value } = expense;
     const { ask, name } = exchangeRates[currency];
     const variavelTrybe = Number(value);
+
+    const handleClickEdit = (elementToEdit: Expense) => {
+      setForm(elementToEdit);
+      setIsEditing(true);
+    };
     return (
       <tr key={ id }>
         <td>{description}</td>
@@ -20,7 +29,13 @@ function Table() {
         <td>{(variavelTrybe * Number(ask)).toFixed(2)}</td>
         <td>Real</td>
         <td>
-          <button type="button">Editar</button>
+          <button
+            type="button"
+            data-testid="edit-btn"
+            onClick={ () => handleClickEdit(expenses[id]) }
+          >
+            Editar
+          </button>
           <button
             type="button"
             data-testid="delete-btn"

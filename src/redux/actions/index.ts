@@ -1,10 +1,11 @@
-import { APIResponse, Dispatch, Expenses, UserType, WalletType } from '../../types';
+import { APIResponse, Dispatch, Expense } from '../../types';
 
 export enum Actions {
   SET_USER_DATA = 'SET_USER_DATA',
   SET_WALLET_DATA = 'SET_WALLET_DATA',
   SET_WALLET_EXPENSES = 'SET_WALLET_EXPENSES',
   DELETE_WALLET_EXPENSES = 'DELETE_WALLET_EXPENSES',
+  EDIT_WALLET_EXPENSES = 'EDIT_WALLET_EXPENSES',
 }
 
 export type SetUserType = {
@@ -44,7 +45,7 @@ export const setDataAPI = (param: APIResponse[]) => {
   };
 };
 
-export const setNewExpense = (param: Expenses) => {
+export const setNewExpense = (param: Expense) => {
   return {
     type: Actions.SET_WALLET_EXPENSES,
     payload: {
@@ -56,6 +57,13 @@ export const setNewExpense = (param: Expenses) => {
 export const deleteExpense = (param: number) => {
   return {
     type: Actions.DELETE_WALLET_EXPENSES,
+    payload: param,
+  };
+};
+
+export const editExpense = (param: Expense) => {
+  return {
+    type: Actions.EDIT_WALLET_EXPENSES,
     payload: param,
   };
 };

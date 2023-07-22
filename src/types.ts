@@ -17,13 +17,13 @@ export type ReduxState = {
 
 export type WalletType = {
   currencies: string[];
-  expenses: Expenses[];
+  expenses: Expense[];
   editor: boolean;
   idToEdit: number;
   cache: APIResponse;
 };
 
-export type Expenses = {
+export type Expense = {
   id: number;
   value: string;
   description: string;
@@ -46,6 +46,13 @@ type Currency = {
 export type GlobalStateType = {
   user: UserType;
   wallet: WalletType;
+};
+
+export type ContextType = {
+  form: Expense;
+  isEditing: boolean;
+  setForm: (param: Expense) => void;
+  setIsEditing: (param: boolean)=> void;
 };
 
 export type Dispatch = ThunkDispatch<ReduxState, null, AnyAction>;

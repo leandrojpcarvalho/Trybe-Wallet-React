@@ -1,22 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { requestCurrencies, setNewExpense } from '../redux/actions';
-import { APIResponse, Dispatch, GlobalStateType } from '../types';
-import { handleOnChange } from '../utils';
-
-const INITIAL_STATE = {
-  id: 0,
-  value: '',
-  description: '',
-  currency: 'USD',
-  method: 'Dinheiro',
-  tag: 'Alimentação',
-  exchangeRates: {} as APIResponse,
-};
+import { useContext, useEffect } from 'react';
+import { editExpense, requestCurrencies, setNewExpense } from '../redux/actions';
+import { Dispatch, GlobalStateType } from '../types';
+import { FORM_INITIAL_STATE, handleOnChange } from '../utils';
+import { Test } from '../context/test';
 
 function WalletForm() {
   const dispatch = useDispatch() as Dispatch;
-  const [form, setForm] = useState(INITIAL_STATE);
+  const { form, isEditing, setForm, setIsEditing } = useContext(Test);
   const { value, description, currency, method, tag } = form;
   const { currencies, cache, expenses } = useSelector((state: GlobalStateType) => {
     return {
@@ -45,8 +36,33 @@ function WalletForm() {
       exchangeRates: cache,
     };
     dispatch(setNewExpense(temp));
-    setForm(INITIAL_STATE);
+    setForm(FORM_INITIAL_STATE);
   };
+
+  const handleClick = () => {
+    dispatch(editExpense(form));
+    setForm(FORM_INITIAL_STATE);
+    setIsEditing(false);
+  };
+
+  const buttonAddOrEditExpense = () => {
+    if (isEditing) {
+      return (
+        <div
+          aria-hidden="true"
+          onClick={ handleClick }
+        >
+          Editar despesa
+        </div>
+      );
+    }
+    return (
+      <button type="submit">
+        Adicionar despesa
+      </button>
+    );
+  };
+
   // useEffect(() => {
   //   if (Number(value) > 0) {
   //     test();
@@ -100,11 +116,7 @@ function WalletForm() {
           <option value="Lazer">Lazer</option>
           <option value="Transporte">Transporte</option>
         </select>
-        <button
-          type="submit"
-        >
-          Adicionar despesa
-        </button>
+        {buttonAddOrEditExpense()}
       </form>
     </div>
   );
